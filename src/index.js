@@ -1,14 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core';
+
+import AuthProvider from './provider/AuthProvider';
+import ShopProvider from './provider/ShopProvider';
 import './index.css';
 import App from './App';
+import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<BrowserRouter>
+			<AuthProvider>
+				<ShopProvider>
+					<ThemeProvider theme={theme}>
+						<App />
+					</ThemeProvider>
+				</ShopProvider>
+			</AuthProvider>
+		</BrowserRouter>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
