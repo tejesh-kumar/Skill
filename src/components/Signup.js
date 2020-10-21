@@ -64,18 +64,6 @@ const Signup = () => {
 	};
 
 	return (
-		// <form onSubmit={handleSubmit}>
-		//     Signup
-
-		//     <input onChange={handleChange} name="email" placeholder='email' value={inputs.email} />
-		//     <input onChange={handleChange} name="password" placeholder='password' value={inputs.password} />
-		//     <button>signup</button>
-		//     {errors.length > 0 ?
-		//         // errors.map(error => <p key={error} style={{color: 'red'}}>{error}</p> )
-		//         <p style={{color: 'red'}}>{errors}</p>
-		//     : null}
-		// </form>
-
 		<Container>
 			<Grid container justify="center">
 				<Grid
