@@ -104,7 +104,7 @@ const Signup = () => {
 
 							<div>
 								{/* <button>Login</button> */}
-								<Button className={classes.btn} color="primary" variant="contained">
+								<Button className={classes.btn} color="primary" variant="contained" type="submit">
 									Signup
 								</Button>
 							</div>
