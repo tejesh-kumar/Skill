@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
 
 import AuthProvider from './provider/AuthProvider';
-import ShopProvider from './provider/ShopProvider';
+import SkillProvider from './provider/SkillProvider';
 import './index.css';
 import App from './App';
 import theme from './theme';
@@ -14,11 +14,11 @@ ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<AuthProvider>
-				<ShopProvider>
+				<SkillProvider>
 					<ThemeProvider theme={theme}>
 						<App />
 					</ThemeProvider>
-				</ShopProvider>
+				</SkillProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	</React.StrictMode>,
