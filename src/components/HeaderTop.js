@@ -70,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-function HeaderBottom() {
-	const { inputs } = useContext(AuthUser);
+function HeaderTop() {
+	const { username } = useContext(AuthUser);
 	const classes = useStyles();
 
 	return (
@@ -96,7 +96,7 @@ function HeaderBottom() {
 					<div className={classes.profilePic}>
 						<img src={ProfileImg} alt="arrow" />
 					</div>
-					<div className={classes.profileName}>{inputs.username}</div>
+					<div className={classes.profileName}>{username}</div>
 				</div>
 				<div className={classes.icon}>
 					<ArrowDropDownIcon />
@@ -106,4 +106,4 @@ function HeaderBottom() {
 	);
 }
 
-export default HeaderBottom;
+export default HeaderTop;

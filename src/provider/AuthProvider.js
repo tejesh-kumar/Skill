@@ -6,11 +6,21 @@ export const AuthUser = React.createContext();
 const AuthProvider = (props) => {
 	const [ inputs, setInputs ] = useState({ username: '', email: '', password: '' });
 	const [ errors, setErrors ] = useState('');
-	// const [ token, setToken ] = useState(null);
+	const [ username, setUsername ] = useState('');
+	const [ validUsername, setValidUsername ] = useState(false);
+	const [ validEmail, setValidEmail ] = useState(false);
+	const [ validPassword, setValidPassword ] = useState(false);
+
 	const [ loggedIn, setLoggedIn ] = useState(false);
 	const [ modalOpen, setModalOpen ] = useState(false);
 
 	const history = useHistory();
+
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('user'));
+		console.log(user);
+		setUsername(user.username);
+	}, []);
 
 	const handleSignup = () => {
 		// authMethods.signup(inputs.email, inputs.password, setErrors, setToken, setLoggedIn);
@@ -23,6 +33,8 @@ const AuthProvider = (props) => {
 		} else {
 			if (inputs.password.length < 6) {
 				setErrors('Password should be atleast 6 characters');
+			} else {
+				setValidPassword(true);
 			}
 		}
 
@@ -32,6 +44,8 @@ const AuthProvider = (props) => {
 			const mailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i;
 			if (!inputs.email.match(mailPattern)) {
 				setErrors('Incorrect Email Address');
+			} else {
+				setValidEmail(true);
 			}
 		}
 
@@ -40,10 +54,13 @@ const AuthProvider = (props) => {
 		} else {
 			if (inputs.username.length < 6) {
 				setErrors('Username should be atleast 6 characters');
+			} else {
+				setValidUsername(true);
 			}
 		}
 
-		if (!errors && inputs.username && inputs.email && inputs.password) {
+		if (validUsername === true && validEmail === true && validPassword === true) {
+			console.log('login');
 			const randId = Math.floor(Math.random() * 68385945);
 			localStorage.setItem('user', JSON.stringify({ ...inputs, id: randId }));
 			history.push('/skill');
@@ -69,6 +86,7 @@ const AuthProvider = (props) => {
 	return (
 		<AuthUser.Provider
 			value={{
+				username,
 				inputs,
 				setInputs,
 				loggedIn,
