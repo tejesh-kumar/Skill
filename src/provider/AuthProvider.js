@@ -16,18 +16,39 @@ const AuthProvider = (props) => {
 
 	const history = useHistory();
 
-	useEffect(() => {
-		const user = JSON.parse(localStorage.getItem('user'));
-		console.log(user);
-		setUsername(user.username);
-	}, []);
+	useEffect(
+		() => {
+			const user = JSON.parse(localStorage.getItem('user'));
+			if (user) {
+				setUsername(user.username);
+			} else {
+				setUsername('User');
+			}
+		},
+		[ loggedIn ]
+	);
 
-	const handleSignup = () => {
-		// authMethods.signup(inputs.email, inputs.password, setErrors, setToken, setLoggedIn);
+	const handleValidity = () => {
+		const mailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i;
+		if (inputs.password.length >= 6 && inputs.email.match(mailPattern) && inputs.username.length >= 6) {
+			return true;
+		}
+		return false;
 	};
 
 	const handleSignin = () => {
-		// form validation
+		// form
+
+		const isValid = handleValidity();
+
+		if (isValid === true) {
+			console.log(handleValidity());
+			const randId = Math.floor(Math.random() * 68385945);
+			history.push('/skill');
+			localStorage.setItem('user', JSON.stringify({ ...inputs, id: randId }));
+			setLoggedIn(true);
+		}
+
 		if (!inputs.password) {
 			setErrors('Password cannot be empty');
 		} else {
@@ -58,18 +79,6 @@ const AuthProvider = (props) => {
 				setValidUsername(true);
 			}
 		}
-
-		if (validUsername === true && validEmail === true && validPassword === true) {
-			console.log('login');
-			const randId = Math.floor(Math.random() * 68385945);
-			localStorage.setItem('user', JSON.stringify({ ...inputs, id: randId }));
-			history.push('/skill');
-			setLoggedIn(true);
-		}
-	};
-
-	const handleSignout = () => {
-		// authMethods.signout(setErrors, setToken, setLoggedIn);
 	};
 
 	const handleModalOpen = () => {
@@ -92,9 +101,7 @@ const AuthProvider = (props) => {
 				loggedIn,
 				setLoggedIn,
 				modalOpen,
-				handleSignup,
 				handleSignin,
-				handleSignout,
 				handleModalOpen,
 				errors
 			}}

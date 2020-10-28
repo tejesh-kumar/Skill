@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -67,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
 	profileName: {
 		fontSize: '2rem',
 		marginLeft: '1.6rem'
+	},
+	linkStyle: {
+		color: theme.palette.text.blue,
+		textDecoration: 'none'
 	}
 }));
 
@@ -80,7 +85,9 @@ function HeaderTop() {
 				<div>
 					<img src={NounArrow} alt="arrow" />
 				</div>
-				<div>LOGO</div>
+				<Link className={classes.linkStyle} to="/">
+					<div>LOGO</div>
+				</Link>
 			</div>
 			<div className={classes.right}>
 				<div className={classes.icon}>

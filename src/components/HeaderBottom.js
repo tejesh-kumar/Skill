@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import NounArrow from '../images/noun_Arrow.svg';
 import NounSpeaker from '../images/noun_Speaker.svg';
 import NounGroup from '../images/noun_group.svg';
 import NounTraining from '../images/noun_training.svg';
@@ -46,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
 			height: '1.8rem',
 			width: '1.8rem'
 		}
+	},
+	linkStyle: {
+		color: theme.palette.text.blue,
+		textDecoration: 'none'
 	}
 }));
 
@@ -55,11 +60,15 @@ function HeaderBottom() {
 	return (
 		<Container className={classes.root} maxWidth="xl" disableGutters={true}>
 			<div className={classes.left}>
-				<div>Home</div>
+				<Link className={classes.linkStyle} to="/">
+					<div>Home</div>
+				</Link>
 				<div>
 					<img src={NounSpeaker} alt="arrow" />
 				</div>
-				<div>Skill Level</div>
+				<Link className={classes.linkStyle} to="/skill">
+					<div>Skill Level</div>
+				</Link>
 			</div>
 			<div className={classes.right}>
 				<div className={classes.roundIcon}>
