@@ -7,10 +7,6 @@ const AuthProvider = (props) => {
 	const [ inputs, setInputs ] = useState({ username: '', email: '', password: '' });
 	const [ errors, setErrors ] = useState('');
 	const [ username, setUsername ] = useState('');
-	const [ validUsername, setValidUsername ] = useState(false);
-	const [ validEmail, setValidEmail ] = useState(false);
-	const [ validPassword, setValidPassword ] = useState(false);
-
 	const [ loggedIn, setLoggedIn ] = useState(false);
 	const [ modalOpen, setModalOpen ] = useState(false);
 
@@ -38,7 +34,6 @@ const AuthProvider = (props) => {
 
 	const handleSignin = () => {
 		// form
-
 		const isValid = handleValidity();
 
 		if (isValid === true) {
@@ -54,8 +49,6 @@ const AuthProvider = (props) => {
 		} else {
 			if (inputs.password.length < 6) {
 				setErrors('Password should be atleast 6 characters');
-			} else {
-				setValidPassword(true);
 			}
 		}
 
@@ -65,8 +58,6 @@ const AuthProvider = (props) => {
 			const mailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i;
 			if (!inputs.email.match(mailPattern)) {
 				setErrors('Incorrect Email Address');
-			} else {
-				setValidEmail(true);
 			}
 		}
 
@@ -75,8 +66,6 @@ const AuthProvider = (props) => {
 		} else {
 			if (inputs.username.length < 6) {
 				setErrors('Username should be atleast 6 characters');
-			} else {
-				setValidUsername(true);
 			}
 		}
 	};
